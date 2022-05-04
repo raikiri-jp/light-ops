@@ -49,9 +49,8 @@
                 <span>{{ config('app.name', 'LightOps') }}</span>
             </a>
             <div>
-                <a href="https://github.com/raikiri-jp" target="_blank" class="text-dark text-decoration-none">
-                    https://github.com/raikiri-jp
-                </a>
+                <a href="https://github.com/raikiri-jp/light-ops" target="_blank"
+                    class="text-dark text-decoration-none">GitHub</a>
             </div>
         </div>
     </footer>
