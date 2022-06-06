@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,11 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('alive_logs', function (Blueprint $table) {
+        Schema::create('sites', function (Blueprint $table) {
             $table->id();
-            $table->string('site_slug');
-            $table->string('status');
+            $table->string('slug')->index();
+            $table->string('name');
+            $table->integer('safe_time')->nullable();
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alive_logs');
+        Schema::dropIfExists('sites');
     }
 };

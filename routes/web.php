@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MonitorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 $require = (new class
 {
-    const SITE = '[a-z0-9_.:\-]{4,64}';
+    const SLUG = '[a-z0-9_.:\-]{4,64}';
 });
 
 Route::get('/', function () {
     return view('sites');
 });
 
-Route::get('/monitor/{site}', function ($site) {
-    return view('monitor', ['site' => $site]);
-})->where('site', $require::SITE);
+Route::get('/monitor/{slug}', [MonitorController::class, 'show'])
+    ->where('slug', $require::SLUG);

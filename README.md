@@ -35,7 +35,7 @@
 
 ### Web API
 
-GET: `/api/alive-log/{site}/add/{status}`
+GET or POST: `/api/alive-log/{site-slug}/add/{status}`
 
 ### Site
 

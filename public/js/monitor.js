@@ -1,4 +1,4 @@
-const site = document.querySelector("#site").value;
+const siteSlug = document.querySelector("#site-slug").value;
 const timezone = "Asia/Tokyo";
 moment.locale("ja");
 
@@ -102,7 +102,7 @@ function switchTableRowStyle(tr, status) {
  */
 function loadLatestStatus() {
     axios
-        .get(`/api/alive-log/${site}/status`)
+        .get(`/api/site/${siteSlug}/status`)
         .then((response) => {
             const status = response.data.status;
             const messages = response.data.messages;
@@ -144,14 +144,14 @@ function loadLatestStatus() {
  */
 function loadHistory() {
     axios
-        .get(`/api/alive-log/${site}/list`)
+        .get(`/api/alive-log/${siteSlug}/list`)
         .then((response) => {
             const tbody = document.querySelector("#alive-logs tbody");
             while (tbody.firstChild) {
                 tbody.removeChild(tbody.firstChild);
             }
             const template = document.querySelector("#site-status-row");
-            for (const record of response.data) {
+            for (const record of response.data.logs) {
                 const status = record.status;
                 const createdAt = moment(record.created_at).tz(timezone);
                 const loggedAt = createdAt.format("LLL");

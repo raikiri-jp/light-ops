@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AliveLogController;
+use App\Http\Controllers\Api\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,32 +17,35 @@ use Illuminate\Support\Facades\Route;
 
 $require = (new class
 {
-    const SITE = '[a-z0-9_.:\-]{4,64}';
+    const SLUG = '[a-z0-9_.:\-]{4,64}';
     const STATUS = '[a-z0-9]{1,16}';
 });
 
-Route::get('/sites', [AliveLogController::class, 'sites']);
+Route::get('/sites', [SiteController::class, 'list']);
+Route::get('/site/{slug}/status', [SiteController::class, 'status'])
+    ->where('slug', $require::SLUG);
+Route::get('/site/add-example', [SiteController::class, 'addExample']);
 
 Route::get(
-    '/alive-log/{site}/add/{status}',
+    '/alive-log/{slug}/add/{status}',
     [AliveLogController::class, 'add']
-)->where('site', $require::SITE)->where('status', $require::STATUS);
+)->where('slug', $require::SLUG)->where('status', $require::STATUS);
 Route::post(
-    '/alive-log/{site}/add/{status}',
+    '/alive-log/{slug}/add/{status}',
     [AliveLogController::class, 'add']
-)->where('site', $require::SITE)->where('status', $require::STATUS);
+)->where('slug', $require::SLUG)->where('status', $require::STATUS);
 
 Route::get(
-    '/alive-log/{site}/list',
+    '/alive-log/{slug}/list',
     [AliveLogController::class, 'list']
-)->where('site', $require::SITE);
+)->where('slug', $require::SLUG);
 
 Route::get(
-    '/alive-log/{site}/latest',
+    '/alive-log/{slug}/latest',
     [AliveLogController::class, 'latest']
-)->where('site', $require::SITE);
+)->where('slug', $require::SLUG);
 
 Route::get(
-    '/alive-log/{site}/status',
+    '/alive-log/{slug}/status',
     [AliveLogController::class, 'status']
-)->where('site', $require::SITE);
+)->where('slug', $require::SLUG);

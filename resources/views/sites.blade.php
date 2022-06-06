@@ -4,7 +4,7 @@
     <template id="site-list-item">
         <a class="list-group-item list-group-item-action fs-2 d-flex justify-content-between">
             <div>
-                <span class="status"></span>
+                <span class="site-name"></span>
             </div>
             <div>
                 <span class="badge"></span>

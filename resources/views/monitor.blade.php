@@ -1,10 +1,10 @@
 <x-layout>
     <x-slot name="title">Alive Logs</x-slot>
-    <input id="site" type="hidden" value="{{ $site }}" />
+    <input id="site-slug" type="hidden" value="{{ $slug }}" />
     <script src="{{ asset('/js/monitor.js') }}"></script>
 
     <!-- Latest status -->
-    <h3><span id="status-badge" class="badge"></span> {{ $site }}</h3>
+    <h3><span id="status-badge" class="badge"></span> {{ $name }}</h3>
     <div id="alert-messages" class="alert alert-danger invisible" role="alert"></div>
     <script>
         loadLatestStatus();
