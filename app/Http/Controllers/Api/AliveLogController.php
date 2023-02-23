@@ -43,7 +43,7 @@ class AliveLogController extends BaseController
         try {
             $aliveLogs = AliveLog::where('site_slug', $site)
                 ->orderByDesc('created_at')
-                ->limit(100)
+                ->limit(300)
                 ->get();
         } catch (Exception $ex) {
             $httpStatus = 500;
